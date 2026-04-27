@@ -27,20 +27,20 @@
 
         /* --- SISTEM NAVIGASI HALAMAN --- */
         .page {
-            display: none; /* Sembunyikan semua halaman secara default */
+            display: none; 
             width: 100%;
             max-width: 500px;
             animation: fadeIn 0.5s ease;
         }
         .page.active {
-            display: block; /* Hanya tampilkan halaman yang aktif */
+            display: block; 
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- DESAIN KOTAK KACA (GLASSMORPHISM) --- */
+        /* --- DESAIN KOTAK KACA --- */
         .container {
             background-color: rgba(255, 255, 255, 0.15); 
             backdrop-filter: blur(8px);
@@ -157,15 +157,15 @@
         <p class="subtitle">Our Personal Journey Hub</p>
         
         <div class="menu-grid">
-            <div class="menu-card" onclick="navigate('todo-page')">
+            <div class="menu-card" onclick="pindahHalaman('todo-page')">
                 <span class="menu-icon">📝</span>
                 Date To-Do List
             </div>
-            <div class="menu-card" onclick="navigate('finance-page')">
+            <div class="menu-card" onclick="pindahHalaman('finance-page')">
                 <span class="menu-icon">💰</span>
                 Date Budget & Finance
             </div>
-            <div class="menu-card" onclick="navigate('game-page')">
+            <div class="menu-card" onclick="pindahHalaman('game-page')">
                 <span class="menu-icon">🎲</span>
                 Truth or Dare
             </div>
@@ -179,7 +179,7 @@
 
 <div id="todo-page" class="page">
     <div class="container">
-        <button class="back-btn" onclick="navigate('home-page')">⬅ Kembali ke Menu</button>
+        <button class="back-btn" onclick="pindahHalaman('home-page')">⬅ Kembali ke Menu</button>
         <h2>Date To-Do List ❤️</h2>
         
         <div class="input-group">
@@ -195,7 +195,7 @@
 
 <div id="finance-page" class="page">
     <div class="container">
-        <button class="back-btn" onclick="navigate('home-page')">⬅ Kembali ke Menu</button>
+        <button class="back-btn" onclick="pindahHalaman('home-page')">⬅ Kembali ke Menu</button>
         <h2>Date Wallet 💸</h2>
         
         <div class="input-group">
@@ -226,7 +226,7 @@
 
 <div id="game-page" class="page">
     <div class="container">
-        <button class="back-btn" onclick="navigate('home-page')">⬅ Kembali ke Menu</button>
+        <button class="back-btn" onclick="pindahHalaman('home-page')">⬅ Kembali ke Menu</button>
         <h2>Truth or Dare 🎲</h2>
         
         <div id="gameBox" class="game-box">
@@ -250,12 +250,12 @@
         todos: [],
         finance: {
             budget: 0,
-            transactions: [] // format: { id: 1, type: 'income', desc: '...', amount: 50000 }
+            transactions: [] 
         }
     };
 
-    // --- SISTEM NAVIGASI ---
-    function navigate(pageId) {
+    // --- SISTEM NAVIGASI (SUDAH DIPERBAIKI) ---
+    function pindahHalaman(pageId) {
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
         if(pageId === 'todo-page') renderTodos();
@@ -279,7 +279,6 @@
                     appData.todos = data.record;
                 } else {
                     appData = data.record;
-                    // Pastikan struktur finance ada jika sebelumnya kosong
                     if (!appData.finance) appData.finance = { budget: 0, transactions: [] };
                     if (!appData.finance.transactions) appData.finance.transactions = [];
                 }
@@ -330,7 +329,7 @@
         });
     }
 
-    function addTodo() {
+    function addDate() {
         const input = document.getElementById('dateInput');
         const text = input.value.trim();
         if (text) {
@@ -355,7 +354,7 @@
         appData.todos.splice(index, 1); renderTodos(); saveData(); 
     }
 
-    document.getElementById('dateInput').addEventListener('keypress', function(e) { if (e.key === 'Enter') addTodo(); });
+    document.getElementById('dateInput').addEventListener('keypress', function(e) { if (e.key === 'Enter') addDate(); });
 
     // ================= FITUR 2: KEUANGAN =================
     function renderFinances() {
@@ -429,4 +428,7 @@
     const truthQuestions = [
         "Jujur, apa hal pertama yang bikin kamu naksir aku?",
         "Momen apa yang paling bikin kamu baper selama 7 bulan kita bareng?",
-        "Apa satu hal kecil dari aku yang selal
+        "Apa satu hal kecil dari aku yang selalu bikin kamu senyum sendiri?",
+        "Kalau kita bisa pergi liburan ke mana aja besok, kamu mau ke mana?",
+        "Apa sifat terlucuku yang baru kamu sadari setelah kita jadian?",
+     
