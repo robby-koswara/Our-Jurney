@@ -424,11 +424,70 @@
         renderFinances(); saveData();
     }
 
-    // ================= FITUR 3: TRUTH OR DARE =================
+// ================= FITUR 3: TRUTH OR DARE =================
     const truthQuestions = [
         "Jujur, apa hal pertama yang bikin kamu naksir aku?",
         "Momen apa yang paling bikin kamu baper selama 7 bulan kita bareng?",
         "Apa satu hal kecil dari aku yang selalu bikin kamu senyum sendiri?",
         "Kalau kita bisa pergi liburan ke mana aja besok, kamu mau ke mana?",
         "Apa sifat terlucuku yang baru kamu sadari setelah kita jadian?",
-     
+        "Jujur, pernah cemburu diem-diem nggak? Kapan?",
+        "Apa hadiah kencan paling berkesan sejauh ini?"
+    ];
+
+    const dareChallenges = [
+        "Tatapan mata tanpa ngomong & tanpa ketawa selama 1 menit!",
+        "Kirim VN (Voice Note) nyanyi satu bait lagu romantis sekarang.",
+        "Ganti wallpaper HP kamu pakai foto aib/lucu aku selama 24 jam.",
+        "Beri aku pijatan di bahu selama 2 menit.",
+        "Cium pipiku secara tiba-tiba! (Kalau lagi jauhan, kirim stiker kiss 5x).",
+        "Puji aku dengan 3 kalimat gombal yang belum pernah kamu sebutin sebelumnya.",
+        "Kasih tau aku satu rahasia kecil yang belum pernah kamu ceritain."
+    ];
+
+    function playGame(type) {
+        const box = document.getElementById('gameBox');
+        let text = "";
+        if(type === 'truth') {
+            text = truthQuestions[Math.floor(Math.random() * truthQuestions.length)];
+            box.style.borderColor = "#0288d1";
+            box.style.color = "#01579b";
+        } else {
+            text = dareChallenges[Math.floor(Math.random() * dareChallenges.length)];
+            box.style.borderColor = "#d32f2f";
+            box.style.color = "#b71c1c";
+        }
+        
+        box.style.opacity = 0;
+        setTimeout(() => {
+            box.innerHTML = `"${text}"`;
+            box.style.opacity = 1;
+        }, 300);
+    }
+
+    // ================= ANIMASI HATI =================
+    function spawnHearts(element) {
+        const rect = element.getBoundingClientRect();
+        const emojis = ['❤️', '💖', '💕', '✨'];
+        for(let i = 0; i < 6; i++) {
+            const heart = document.createElement('div');
+            heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            heart.className = 'floating-heart';
+            const offsetX = (Math.random() - 0.5) * 80;
+            const offsetY = (Math.random() - 0.5) * 80;
+            heart.style.left = `${rect.left + 5}px`;
+            heart.style.top = `${rect.top + 5}px`;
+            heart.style.setProperty('--tx', `${offsetX}px`);
+            heart.style.setProperty('--ty', `${offsetY - 60}px`);
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 800);
+        }
+    }
+
+    // MULAI SISTEM
+    loadData();
+
+</script>
+
+</body>
+</html>
